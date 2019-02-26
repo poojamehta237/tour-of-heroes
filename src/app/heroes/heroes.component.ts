@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HEROES } from '../mock-heroes';
+import { HeroService} from '../hero.service';
 
 @Component({   //@Component is decorator that specifies angular metadata for component
   selector: 'app-heroes',       //component's css element selector
@@ -8,24 +9,25 @@ import { HEROES } from '../mock-heroes';
   styleUrls: ['./heroes.component.css']   //location of component's private css file
 })
 export class HeroesComponent implements OnInit {
-
-  hero : Hero = {
-    id:1,
-    name:'WindStorm'
-  }
-
-  constructor() { }
+  
+  //heroes = HEROES;  //since not importing HEROES from mock-heroes
+  heroes : Hero[];       //so we use it from hero.service
+  // selectedHero : Hero;
+  
+  //Add a private heroService parameter of type HeroService to the constructor.
+  constructor(private heroService: HeroService) { }
 
   //Angular calls ngOnInit shortly after creating a component
-  ngOnInit() { 
+  ngOnInit() {
+    this.getHeroes();
   }
-  heroes = HEROES;
-  //hero ="WindStorm";
-  
-  //onclick property in list of heroes using typescript
-  selectedHero : Hero;
-  onSelect(hero:Hero):void{
-    this.selectedHero = hero;
-  }
-
+  // onSelect(hero:Hero):void{
+  //   this.selectedHero = hero;
+  // }
+  getHeroes(): void{
+    this.heroService.getHeroes()
+    .subscribe(heroes => this.heroes = heroes);
+  } 
 }
+
+

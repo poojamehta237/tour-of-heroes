@@ -1,19 +1,14 @@
-<h2>{{hero.name | uppercase}} Details :</h2>
-<p><span>ID : </span>{{hero.id}}</p>
-<p><span>Name : </span>{{hero.name}}</p>
-<!-- two way binding -->
-<div>
-  <label>name:<input [(ngModel)]="hero.name" placeholder="name">
-  </label>
-</div>
-<h2>My Heroes List--</h2>
-<ul class = "heroes">
-  <li *ngFor = "let hero of heroes" (click)= "onSelect(hero)">
-    <span class = "badge">{{hero.id}} : </span>{{hero.name}}<br>
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <!-- here in class.selected ,.selected take property from css file  called class binding-->
+  <li *ngFor="let hero of heroes">
+    <a routerLink='/detail/{{hero.id}}'></a>
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
   </li>
 </ul>
 
-<div *ngIf="selectedHero" >
+<div *ngIf="selectedHero">
+
   <h2>{{selectedHero.name | uppercase}} Details</h2>
   <div><span>id: </span>{{selectedHero.id}}</div>
   <div>
@@ -21,4 +16,5 @@
       <input [(ngModel)]="selectedHero.name" placeholder="name">
     </label>
   </div>
+
 </div>
