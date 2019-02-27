@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Hero } from '../hero';
-import { HEROES } from '../mock-heroes';
-import { HeroService} from '../hero.service';
+import { HeroService } from '../hero.service';
 
 @Component({   //@Component is decorator that specifies angular metadata for component
   selector: 'app-heroes',       //component's css element selector
@@ -9,25 +9,31 @@ import { HeroService} from '../hero.service';
   styleUrls: ['./heroes.component.css']   //location of component's private css file
 })
 export class HeroesComponent implements OnInit {
-  
-  //heroes = HEROES;  //since not importing HEROES from mock-heroes
-  heroes : Hero[];       //so we use it from hero.service
-  // selectedHero : Hero;
-  
-  //Add a private heroService parameter of type HeroService to the constructor.
+  heroes: Hero[];
+
   constructor(private heroService: HeroService) { }
 
-  //Angular calls ngOnInit shortly after creating a component
   ngOnInit() {
     this.getHeroes();
   }
-  // onSelect(hero:Hero):void{
-  //   this.selectedHero = hero;
-  // }
-  getHeroes(): void{
+
+  getHeroes(): void {
     this.heroService.getHeroes()
     .subscribe(heroes => this.heroes = heroes);
-  } 
+  }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService.addHero({ name } as Hero)
+      .subscribe(hero => {
+        this.heroes.push(hero);
+      });
+  }
+
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero).subscribe();
+  }
+
 }
-
-

@@ -1,13 +1,26 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div>
-  <h1>{{title}}!
-  </h1>
-</div>
-  <!-- <app-heroes></app-heroes>  add app-heroes of custom component to work app/heroes -->
-  <!-- replace with app-heroes to router-outlet -->
-  <nav>
-    <a routerLink = '/heroes'>Heroes</a>
-    <a routerLink = '/dashboard'>Dashboard</a>
-  </nav>
-<router-outlet></router-outlet> 
-<app-messages></app-messages>
+<html>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class = "container">
+  <div align='center' class='page-header'>
+    <h1>{{title}}!</h1>
+  </div>
+    <!-- <app-heroes></app-heroes>  add app-heroes of custom component to work app/heroes -->
+    <!-- replace with app-heroes to router-outlet -->
+    <nav>
+      <a routerLink = '/heroes'>Heroes</a>
+      <a routerLink = '/dashboard'>Dashboard</a>
+    </nav>
+  <router-outlet></router-outlet> 
+  <app-messages></app-messages>
+  </div>
+</body>
+</html>
